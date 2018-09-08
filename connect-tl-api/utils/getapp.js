@@ -15,6 +15,14 @@ function validateApp (data) {
   throw("Validation failed");
 }
 
+// Add application version and environment
+function addApp (data) {
+  data.version = process.env.npm_package_version;
+  if (process.env.NODE_ENV == "production") { data.dev = false; }
+  else { data.dev = true; }
+  return data;
+}
+
 // Read the file content and return JSON object
 const myApp = () => {
   try {
@@ -23,7 +31,7 @@ const myApp = () => {
   catch (err) {
     throw(err);
   }
-  return validateApp(myAppData);
+  return addApp(validateApp(myAppData));
 };
 
 module.exports = myApp();
