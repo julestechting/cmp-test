@@ -3,8 +3,8 @@ const express = require('express'),
   router = express.Router();
 
 // Default
-router.get('/', function (req, res) {
-  console.log('Home page hit');
+router.get('/', (req, res) => {
+  console.log('Router hit');
   res.send("Welcome to the API!");
 });
 
