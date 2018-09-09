@@ -1,9 +1,14 @@
 const express = require('express'),
-  router = express.Router();
+  router = express.Router(),
+  checkPhone = require('./check-phone');
 
-// Default
-router.get('/', (res, req) => {
-  res.json({response: "OK"});
+router.get('/checkphone', async (req, res) => {
+  return res.json(await checkPhone());
 });
 
-export.modules = router;
+// Default
+router.get('/', (req, res) => {
+  return res.json({response: "OK"});
+});
+
+module.exports = router;
