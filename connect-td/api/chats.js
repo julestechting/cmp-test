@@ -2,6 +2,7 @@ const { checkInt, checkStr, checkJSON } = require('../utils/checkargs')
 const init = require('./init')
 
 const getChat = async (body) => {
+  var result
   try {
     const client = await init()
     if(checkJSON(body, 1) &&
@@ -10,18 +11,21 @@ const getChat = async (body) => {
         '@type': 'getChat',
         'chat_id': body.chat_id
       })
-      return {response: "OK", chat: chat}
+      result = {type: "OK", response: chat}
     }
     else {
-      return {response: "Validation failed"}
+      result = {type: "error", code: "VALID-FAIL"}
     }
   }
   catch (err) {
-    throw(err)
+    console.log(err)
+    result = {type: "error", code: "TL-API-FAIL"}
   }
+  return result;
 }
 
 const getChatMembers = async (body) => {
+  var result
   try {
     const client = await init()
     if(checkJSON(body, 1) &&
@@ -35,15 +39,17 @@ const getChatMembers = async (body) => {
         'offset': '0',
         'limit': '10'
       })
-      return {response: "OK", chat: chat}
+      result = {type: "OK", response: chat}
     }
     else {
-      return {response: "Validation failed"}
+      result = {type: "error", code: "VALID-FAIL"}
     }
   }
   catch (err) {
-    throw(err)
+    console.log(err)
+    result = {type: "error", code: "TL-API-FAIL"}
   }
+  return result
 }
 
 const setSuperName = async (body) => {
@@ -59,14 +65,14 @@ const setSuperName = async (body) => {
         'supergroup_id': body.supergroup_id,
         'username': body.username
       })
-      return {response: "OK", chat: chat}
+      result = {type: "OK", response: chat}
     }
     else {
-      return {response: "Validation failed"}
+      result = {type: "error", code: "VALID-FAIL"}
     }
   }
   catch (err) {
-    throw(err)
+    result = {type: "error", code: "TL-API-FAIL"}
   }
 }
 
