@@ -9,11 +9,21 @@ const init = async () => {
       type: 'user',
       value: myapp.phone
     },
-    binaryPath: '/usr/local/lib/libtdjson'
+    binaryPath: '/usr/local/lib/libtdjson',
+    verbosityLevel: 2
   })
 
   await myclient.ready
 
+  /*
+  myclient.registerCallback('td:update', (update) => {
+    console.log('Got update:', JSON.stringify(update, null, 2))
+  })
+
+  myclient.registerCallback('td:error', (update) => {
+    console.error('Got error:', JSON.stringify(update, null, 2))
+  })
+  */
   return myclient
 }
 
