@@ -17,6 +17,10 @@ const getChat = async (body) => {
     else {
       result = {type: "error", code: "VALID-FAIL"}
     }
+    client.loop = () => { return null }
+    await client._destroy()
+    console.log(client.client)
+    client = null
   }
   catch (err) {
     console.log(err)
