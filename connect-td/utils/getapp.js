@@ -11,7 +11,9 @@ function validateApp (data) {
     checkStr(data.api_hash) &&
     checkStr(data.phone) && data.phone.charAt(0) == '+' &&
     checkStr(data.lang_code) &&
-    checkJSON(data, 4))
+    checkStr(data.bot_api_key) &&
+    checkStr(data.bot_username) &&
+    checkJSON(data, 7))
     return data;
   throw("Validation failed");
 }
